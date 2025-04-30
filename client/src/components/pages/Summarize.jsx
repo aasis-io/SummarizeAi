@@ -151,7 +151,7 @@ const Summarize = () => {
           {authData?.user && (
             <button
               onClick={() => navigate("/dashboard")}
-              className="mb-6 text-teal-500 hover:cursor-pointer font-semibold flex items-center gap-2"
+              className="mb-6 text-main hover:cursor-pointer font-semibold flex items-center gap-2"
             >
               Go to Dashboard →
             </button>
@@ -168,7 +168,7 @@ const Summarize = () => {
               Input Text
             </h1>
             <textarea
-              className="w-full h-64 p-4 border rounded-lg shadow-sm focus:ring-2 focus:ring-teal-500 outline-none focus:border-none transition"
+              className="w-full h-64 p-4 border rounded-lg shadow-sm focus:ring-2 focus:ring-main outline-none focus:border-none transition"
               placeholder="Enter text to summarize..."
               value={text}
               onChange={handleTextChange}
@@ -186,7 +186,7 @@ const Summarize = () => {
 
             <button
               onClick={summarizeText}
-              className="w-full mt-4 bg-teal-500 text-white font-semibold py-3 rounded-lg shadow-lg hover:bg-teal-600 hover:cursor-pointer transition flex items-center justify-center gap-2"
+              className="w-full mt-4 bg-main text-white font-semibold py-3 rounded-lg shadow-lg hover:bg-main-dark hover:cursor-pointer transition flex items-center justify-center gap-2"
               disabled={loading}
             >
               {loading ? <Loader2 className="animate-spin" /> : "Summarize"}

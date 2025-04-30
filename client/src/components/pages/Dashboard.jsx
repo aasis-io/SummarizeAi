@@ -1,18 +1,23 @@
-import { useContext } from "react";
+import { Info, LogOut, Mail, Trash2 } from "lucide-react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import AuthContext from "./../../context/AuthContext";
-import HistoryContext from "./../../context/HistoryContext";
-import { Trash2, LogOut, Mail, Info } from "lucide-react";
+import AuthContext from "../../context/AuthContext";
+import HistoryContext from "../../context/HistoryContext";
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const { authData, logout } = useContext(AuthContext);
+  const { authData, logout, clearAuthData } = useContext(AuthContext);
   const { history, deleteHistoryItem, clearAllHistory } =
     useContext(HistoryContext);
 
+  useEffect(() => {
+    if (!authData || !authData.user) {
+      navigate("/login");
+    }
+  }, [authData, navigate]);
+
   if (!authData || !authData.user) {
-    navigate("/login");
     return null;
   }
 
@@ -28,7 +33,8 @@ const Dashboard = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         logout();
-        navigate("/");
+        clearAuthData();
+        navigate("/login");
       }
     });
   };
@@ -75,18 +81,12 @@ const Dashboard = () => {
             </h3>
             <span className="w-16 h-[3px] bg-main block rounded-full relative mt-3 after:w-[5px] after:h-[5px] after:absolute after:bg-main after:rounded-full after:left-[67px] after:bottom-[-1px]"></span>
           </div>
-          {/* <button
-            onClick={handleLogout}
-            className="mb-6 text-red-500 hover:cursor-pointer font-semibold flex items-center gap-2"
-          >
-            <LogOut size={20} /> Logout
-          </button> */}
         </div>
 
         <div className="w-full bg-[#fbfaf8] box-shadow p-10 rounded-3xl border border-gray-200">
           {authData?.user && (
             <div className="bg-[#fbfaf8] p-6 rounded-xl border border-teal-200 box-shadow mb-6 font-poppins">
-              <h2 className="text-2xl font-bold text-teal-700 font-caudex">
+              <h2 className="text-2xl font-bold text-main-dark font-caudex">
                 Personal Details
               </h2>
               <div className="flex place-items-center justify-between mt-3">
@@ -112,7 +112,7 @@ const Dashboard = () => {
 
           <div className="bg-gray-50 p-6 rounded-xl border border-gray-200 box-shadow font-poppins">
             <div className="flex justify-between items-center mb-3">
-              <h2 className="text-2xl font-semibold text-teal-700 font-caudex">
+              <h2 className="text-2xl font-semibold text-main-dark font-caudex">
                 Summarized History
               </h2>
               {history.length > 0 && (
@@ -160,7 +160,7 @@ const Dashboard = () => {
           </div>
 
           <div className="bg-gray-50 p-6 rounded-xl border mt-6 border-gray-200 box-shadow mb-6 font-poppins">
-            <h2 className="text-2xl font-bold text-teal-700 font-caudex">
+            <h2 className="text-2xl font-bold text-main-dark font-caudex">
               Help & Terms
             </h2>
             <h3 className="text-base font-medium mt-3 text-gray-600">
@@ -169,7 +169,7 @@ const Dashboard = () => {
             <div className="flex mt-4">
               <div className="flex flex-col gap-4">
                 <div className="text-gray-700 flex gap-4 place-items-center">
-                  <Mail className="text-teal-500 h-5 w-5 mb-5" />
+                  <Mail className="text-main h-5 w-5 mb-5" />
                   <div>
                     <a
                       href="mailto:helloashishthapa@gmail.com"
@@ -181,7 +181,7 @@ const Dashboard = () => {
                   </div>
                 </div>
                 <div className="text-gray-700 flex gap-4 place-items-center">
-                  <Info className="text-teal-500 h-5 w-5" />
+                  <Info className="text-main h-5 w-5" />
                   <div>
                     <p>
                       If you need any help, please do not hesitate to contact
@@ -190,8 +190,12 @@ const Dashboard = () => {
                   </div>
                 </div>
                 <div className="text-gray-700 flex gap-8 mt-6 place-items-center">
-                  <a href="" className="underline">Terms of service</a>
-                  <a href="" className="underline">Privacy Policy</a>
+                  <a href="" className="underline">
+                    Terms of service
+                  </a>
+                  <a href="" className="underline">
+                    Privacy Policy
+                  </a>
                 </div>
               </div>
             </div>

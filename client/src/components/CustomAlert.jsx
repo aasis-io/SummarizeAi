@@ -35,7 +35,7 @@ const CustomAlert = ({
 
           <button
             onClick={onConfirm}
-            className="px-4 py-2 bg-teal-500 hover:cursor-pointer text-white rounded-lg hover:bg-teal-600 transition"
+            className="px-4 py-2 bg-main hover:cursor-pointer text-white rounded-lg hover:bg-main-dark transition"
           >
             {confirmText}
           </button>

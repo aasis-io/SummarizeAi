@@ -8,11 +8,12 @@
   --font-poppins: "Poppins", sans-serif;
   --font-bona: "Bona Nova", sans-serif;
   --font-caudex: "Caudex", sans-serif;
-
   --color-background: #f6f4f0;
-  --color-main: #79d7be;
-  --color-hover: #6dc2ab;
+  --color-main: oklch(70.4% 0.14 182.503);
+  --color-main-dark: oklch(60% 0.118 184.704);
+  --color-hover: oklch(60% 0.118 184.704);
 }
+
 
 html {
   scroll-behavior: smooth;
@@ -22,6 +23,7 @@ html {
   max-width: 1270px;
   margin-left: auto;
   margin-right: auto;
+
 }
 
 .swiper {
@@ -37,4 +39,17 @@ html {
 
 .box-shadow{
   box-shadow: 0 0 30px var(--color-gray-200);
+}
+
+@keyframes upDownEffect {
+  0%{
+    transform: translateY(20px);
+  }
+  100%{
+    transform: translateY(0px);
+  }
+}
+
+.myAnimation{
+  animation: upDownEffect alternate infinite 1s;
 }

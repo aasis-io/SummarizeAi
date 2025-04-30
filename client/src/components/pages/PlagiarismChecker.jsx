@@ -46,7 +46,7 @@ const PlagiarismChecker = () => {
       if (wordCount > 500) {
         setAlertData({
           message:
-            "You have exceeded the 200-word limit. Log in to increase the limit to 500 words.",
+            "You have exceeded the 500-word limit. Log in to increase the limit to 1000 words.",
           confirmText: "Go to Login",
           cancelText: "Cancel",
           onConfirm: () => navigate("/login"),
@@ -61,7 +61,7 @@ const PlagiarismChecker = () => {
       if (wordCount > 1000) {
         setAlertData({
           message:
-            "You have exceeded the 500-word limit. Get a premium account to get unlimited access.",
+            "You have exceeded the 1000-word limit. Get a premium account to get unlimited access.",
           confirmText: "Get Premium",
           cancelText: "Cancel",
           onConfirm: () => navigate("/premium"),
@@ -115,7 +115,7 @@ const PlagiarismChecker = () => {
           {authData?.user && (
             <button
               onClick={() => navigate("/dashboard")}
-              className="mb-6 text-teal-500 hover:cursor-pointer font-semibold flex items-center gap-2"
+              className="mb-6 text-main hover:cursor-pointer font-semibold flex items-center gap-2"
             >
               Go to Dashboard →
             </button>
@@ -133,22 +133,29 @@ const PlagiarismChecker = () => {
               Input Text
             </h1>
             <textarea
-              className="w-full h-80 p-4 border rounded-lg shadow-sm focus:ring-2 focus:ring-teal-500 outline-none"
+              className="w-full h-80 p-4 border rounded-lg shadow-sm focus:ring-2 focus:ring-main outline-none"
               placeholder="Enter text to check for plagiarism..."
               value={text}
               onChange={handleTextChange}
             />
             <p
               className={`mt-2 text-center ${
-                wordCount > 500 ? "text-red-500" : "text-gray-500"
+                authData === null || !authData.user
+                  ? wordCount > 500
+                    ? "text-red-500"
+                    : "text-gray-500" // Guest, limit is 500
+                  : wordCount > 1000
+                  ? "text-red-500"
+                  : "text-gray-500" // Authenticated user, limit is 1000
               }`}
             >
               Word Limit: {wordCount} /{" "}
               {authData === null || !authData.user ? "500" : "1000"}
             </p>
+
             <button
               onClick={checkPlagiarism}
-              className="w-full mt-4 bg-teal-500 text-white font-semibold py-3 rounded-lg shadow-lg hover:bg-teal-600 hover:cursor-pointer flex items-center justify-center gap-2"
+              className="w-full mt-4 bg-main text-white font-semibold py-3 rounded-lg shadow-lg hover:bg-main-dark hover:cursor-pointer flex items-center justify-center gap-2"
             >
               {loading ? (
                 <Loader2 className="animate-spin" />
@@ -176,13 +183,13 @@ const PlagiarismChecker = () => {
                   {result.similarityScores.map((item, index) => (
                     <li
                       key={index}
-                      className="p-4 bg-white shadow rounded-lg border-l-4 border-teal-500"
+                      className="p-4 bg-white shadow rounded-lg border-l-4 border-main"
                     >
                       <a
                         href={item.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-teal-600 font-medium"
+                        className="text-main-dark font-medium"
                       >
                         {item.url}
                       </a>

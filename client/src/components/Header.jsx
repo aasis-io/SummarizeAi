@@ -1,12 +1,10 @@
+import { useContext, useEffect, useRef, useState } from "react";
 import { BiUser } from "react-icons/bi";
-import Logo from "./../assets/Logo.svg";
 import { CgClose, CgMenuRight } from "react-icons/cg";
-
-import { Link, useLocation } from "react-router-dom"; // Import useLocation hook
-import { useState, useContext, useEffect, useRef } from "react";
-import AuthContext from "../context/AuthContext"; // Import the AuthContext
-
 import { PiDiamondsFourBold } from "react-icons/pi";
+import { Link, useLocation } from "react-router-dom";
+import AuthContext from "../context/AuthContext"; // Import the AuthContext
+import Logo from "./../assets/Logo.svg";
 
 const navItems = [
   { item: "Plagiarism Checker", path: "/plagiarism-checker" },
@@ -18,12 +16,13 @@ const premiumBtn = "Get Premium";
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const { authData, logout } = useContext(AuthContext); // Access authData and logout function from context
-  const location = useLocation(); // Get current location
-  const headerRef = useRef(null); // Ref to the header element
+  const { authData, logout } = useContext(AuthContext); 
+  const location = useLocation();
+  const headerRef = useRef(null);
+
   // Toggle blur class on the content
   const toggleBodyBlur = () => {
-    const bodyContent = document.querySelector(".main-content"); // Select the main content (exclude header)
+    const bodyContent = document.querySelector(".main-content");
     if (bodyContent) {
       bodyContent.classList.toggle("blurred", isMenuOpen); // Apply blur when menu is open
     }
@@ -32,20 +31,18 @@ const Header = () => {
   // Remove blur when the page route changes
   useEffect(() => {
     toggleBodyBlur(); // Remove the blur when location changes
-
-    // Cleanup function to remove blur when the component unmounts
     return () => {
       const bodyContent = document.querySelector(".main-content");
       if (bodyContent) {
         bodyContent.classList.remove("blurred");
       }
     };
-  }, [location, isMenuOpen]); // Depend on location and isMenuOpen state
+  }, [location, isMenuOpen]);
 
   // Close the mobile menu when the route changes
   useEffect(() => {
     setIsMenuOpen(false); // Close the menu when route changes
-  }, [location]); // Trigger when location changes (page navigation)
+  }, [location]);
 
   // Close the menu when clicked outside the header
   useEffect(() => {
@@ -57,7 +54,6 @@ const Header = () => {
 
     document.addEventListener("mousedown", handleClickOutside); // Listen for clicks outside
 
-    // Cleanup event listener on unmount
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
@@ -99,7 +95,7 @@ const Header = () => {
                   </Link>
                 ))}
               </nav>
-              <Link className="text-white flex items-center gap-1 font-poppins font-medium transition duration-150 px-3.5 py-2.5 bg-teal-500 rounded-lg hover:bg-teal-600">
+              <Link className="text-white flex items-center gap-1 font-poppins font-medium transition duration-150 px-3.5 py-2.5 bg-main rounded-lg hover:bg-main-600">
                 <PiDiamondsFourBold className="text-white" />
                 {premiumBtn}
               </Link>
@@ -134,7 +130,7 @@ const Header = () => {
 
             {/* Mobile Menu Button */}
             <div className="lg:hidden flex gap-6">
-              <Link className="hidden sm:flex lg:hidden text-white font-poppins font-medium transition duration-150 px-3.5 py-2.5 bg-teal-500 rounded-lg hover:bg-teal-600">
+              <Link className="hidden sm:flex lg:hidden text-white font-poppins font-medium transition duration-150 px-3.5 py-2.5 bg-main rounded-lg hover:bg-main-600">
                 {premiumBtn}
               </Link>
               <button
@@ -165,7 +161,7 @@ const Header = () => {
                         {n.item}
                       </Link>
                     ))}
-                    <Link className="text-white sm:hidden font-poppins font-medium transition duration-150 px-3.5 py-2.5 bg-teal-500 rounded-lg hover:bg-teal-600">
+                    <Link className="text-white sm:hidden font-poppins font-medium transition duration-150 px-3.5 py-2.5 bg-main rounded-lg hover:bg-main-600">
                       {premiumBtn}
                     </Link>
                   </nav>
