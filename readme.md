@@ -17,9 +17,22 @@ SummarizeAi is a full-stack AI-powered web application designed to help users su
 ### Admin Features
 - Secure admin login
 - View all registered users
-- View each user's summarization/plagiarism history
+- View each user's summarization history
 - Delete users with confirmation prompts
 - Separate admin dashboard
+
+---
+### Screenshots
+
+## 🏠 Home Page
+![Home Page](./assets/images/home-page.png)
+
+## 🔐 Login
+![Login](./assets/images/login.png)
+
+## 🧠 User Dashboard
+![User Dashboard](./assets/images/user-dashboard.png)
+
 
 ---
 
@@ -52,9 +65,8 @@ SummarizeAi is a full-stack AI-powered web application designed to help users su
 ```
 SummarizeAi/
 ├── client/                   # React frontend
-│   ├── components/           # UI components
+│   ├── components/           # UI components/Page views (Login, Signup, Dashboard & others)
 │   ├── context/              # Auth context
-│   ├── pages/                # Page views (Login, Signup, Dashboard)
 │   └── App.jsx               # Routing and layout
 ├── server/                   # Node/Express backend
 │   ├── config/               # Passport, DB, dotenv
