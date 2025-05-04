@@ -13,8 +13,9 @@ const UserDetails = () => {
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
-        const token = localStorage.getItem("adminToken");
-        const apiUrl = "http://localhost:5000"; // Base URL for your backend
+        const adminData = JSON.parse(localStorage.getItem("adminData"));
+        const token = adminData?.token;
+        const apiUrl = "http://localhost:5000";
         const res = await axios.get(`${apiUrl}/api/admin/users/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,

@@ -8,7 +8,7 @@ import AuthContext from "../../context/AuthContext";
 
 const Login = () => {
   const navigate = useNavigate();
-
+  const apiUrl = "http://localhost:5000";
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get("token");
@@ -67,7 +67,7 @@ const Login = () => {
         const { name, email, sub: googleId } = googleRes.data;
 
         const res = await axios.post(
-          "http://localhost:5000/api/auth/google-login",
+          apiUrl + `/api/auth/google-login`,
           { name, email, googleId }
         );
 

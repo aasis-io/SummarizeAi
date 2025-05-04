@@ -35,6 +35,7 @@ const Summarize = () => {
     setWordCount(wordCount);
   };
 
+  const apiUrl = "http://localhost:5000";
   const summarizeText = async () => {
     if (!text.trim()) return;
 
@@ -100,11 +101,9 @@ const Summarize = () => {
         ? { Authorization: `Bearer ${authData.token}` }
         : {};
 
-      const response = await axios.post(
-        "http://localhost:5000/api/summarize",
-        payload,
-        { headers }
-      );
+      const response = await axios.post(apiUrl + "/api/summarize", payload, {
+        headers,
+      });
 
       setSummary(response.data.summary);
 
@@ -156,7 +155,6 @@ const Summarize = () => {
               Go to Dashboard →
             </button>
           )}
-
         </div>
         <div
           className={`w-full ${

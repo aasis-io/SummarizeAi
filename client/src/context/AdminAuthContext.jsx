@@ -5,7 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const AdminAuthContext = createContext();
-const apiUrl = "http://localhost:5000/api/admin-auth";
+const serverUrl = "http://localhost:5000";
+const apiUrl = serverUrl + `/api/admin-auth`;
 
 export const AdminAuthProvider = ({ children }) => {
   const [adminData, setAdminData] = useState(null);

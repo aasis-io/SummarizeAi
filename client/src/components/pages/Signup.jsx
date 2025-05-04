@@ -16,6 +16,8 @@ const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [formError, setFormError] = useState(null);
 
+  const apiUrl = "http://localhost:5000";
+  
   const togglePasswordVisibility = (e) => {
     setShowPassword(e.target.checked);
   };
@@ -30,7 +32,7 @@ const Signup = () => {
     }
 
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/signup", {
+      const res = await axios.post(apiUrl + `/api/auth/signup`, {
         name,
         email,
         password,
@@ -48,6 +50,7 @@ const Signup = () => {
       setFormError(err.response?.data?.message || "Signup failed");
     }
   };
+  console.log(apiUrl + `/api/auth/google-login`);
 
   const loginWithGoogle = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
@@ -64,10 +67,12 @@ const Signup = () => {
 
         const { name, email, sub: googleId } = data;
 
-        const res = await axios.post(
-          "http://localhost:5000/api/auth/google-login",
-          { name, email, googleId }
-        );
+
+        const res = await axios.post(apiUrl + `/api/auth/google-login`, {
+          name,
+          email,
+          googleId,
+        });
 
         if (res.data.token) {
           const authData = {

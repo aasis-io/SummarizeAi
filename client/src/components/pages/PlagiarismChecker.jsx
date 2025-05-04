@@ -16,6 +16,7 @@ const PlagiarismChecker = () => {
   const [showAlert, setShowAlert] = useState(false);
   const [alertData, setAlertData] = useState(null);
 
+  const apiUrl = "http://localhost:5000";
   const handleTextChange = (e) => {
     const updatedText = e.target.value;
     setText(updatedText);
@@ -78,7 +79,7 @@ const PlagiarismChecker = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/plagiarism/check",
+        apiUrl + `/api/plagiarism/check`,
         { text }
       );
       setResult(response.data);

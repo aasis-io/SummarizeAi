@@ -15,7 +15,7 @@ const fetchGoogleResults = async (query) => {
     return response.data.items || [];
   } catch (error) {
     console.error(
-      "❌ Google API Error:",
+      "Google API Error:",
       error.response?.data || error.message
     );
     return [];
